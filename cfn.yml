@@ -18,14 +18,18 @@ Resources:
         - !Ref DenemeSecGrup
       UserData:
         Fn::Base64: |
-          #!/bin/bash
-          dnf update -y
-          dnf install httpd -y
-          DATE_TIME='date'
-          wget https://raw.githubusercontent.com/saityildirim/kittens-static-website-ec2/main/static-web/index.html /var/www/html/index.html
+          #! /bin/bash
+          yum update -y
+          yum install httpd -y
+          FOLDER="https://raw.githubusercontent.com/awsdevopsteam/101-kittens-carousel-static-website/master/static-web"
+          cd /var/www/html
+          wget ${FOLDER}/index.html
+          wget ${FOLDER}/cat0.jpg
+          wget ${FOLDER}/cat1.jpg
+          wget ${FOLDER}/cat2.jpg
+          wget ${FOLDER}/cat3.png
           systemctl start httpd
           systemctl enable httpd
-
   DenemeSecGrup:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -38,10 +42,6 @@ Resources:
         - IpProtocol: tcp
           FromPort: 80
           ToPort: 80
-          CidrIp: 0.0.0.0/0
-        - IpProtocol: tcp
-          FromPort: 443
-          ToPort: 443
           CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
