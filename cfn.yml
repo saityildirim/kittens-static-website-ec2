@@ -23,11 +23,11 @@ Resources:
           yum install httpd -y
           FOLDER="https://raw.githubusercontent.com/saityildirim/kittens-static-website-ec2/main/static-web"
           cd /var/www/html
-          wget ${FOLDER}/index.html && 
-          wget ${FOLDER}/cat0.jpg && 
-          wget ${FOLDER}/cat1.jpg && 
-          wget ${FOLDER}/cat2.jpg && 
-          wget ${FOLDER}/cat3.png &&
+          wget ${FOLDER}/index.html
+          wget ${FOLDER}/cat0.jpg
+          wget ${FOLDER}/cat1.jpg 
+          wget ${FOLDER}/cat2.jpg 
+          wget ${FOLDER}/cat3.png
           systemctl start httpd
           systemctl enable httpd
   KittensSecGrup:
@@ -46,8 +46,3 @@ Resources:
       Tags:
         - Key: Name
           Value: Kittens-Web-Page
-
-  Outputs:
-    KittensWebpageURL:
-      Description: The URL of the Kittens Web Page
-      Value: !GetAtt KittensInstance.PublicDNSName
