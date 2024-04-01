@@ -15,19 +15,19 @@ Resources:
       ImageId: !Ref LatestAmiId
       InstanceType: t2.micro
       SecurityGroups:
-        - !Ref KittensSecGrupSecGrup
+        - !Ref KittensSecGrup
       UserData:
         Fn::Base64: |
           #! /bin/bash
           yum update -y
           yum install httpd -y
-          FOLDER="https://raw.githubusercontent.com/awsdevopsteam/101-kittens-carousel-static-website/master/static-web"
+          FOLDER="https://raw.githubusercontent.com/saityildirim/kittens-static-website-ec2/main/static-web"
           cd /var/www/html
-          wget ${FOLDER}/index.html
-          wget ${FOLDER}/cat0.jpg
-          wget ${FOLDER}/cat1.jpg
-          wget ${FOLDER}/cat2.jpg
-          wget ${FOLDER}/cat3.png
+          wget ${FOLDER}/index.html && 
+          wget ${FOLDER}/cat0.jpg && 
+          wget ${FOLDER}/cat1.jpg && 
+          wget ${FOLDER}/cat2.jpg && 
+          wget ${FOLDER}/cat3.png &&
           systemctl start httpd
           systemctl enable httpd
   KittensSecGrup:
@@ -45,4 +45,9 @@ Resources:
           CidrIp: 0.0.0.0/0
       Tags:
         - Key: Name
-          Value: Deneme-Instance
+          Value: Kittens-Web-Page
+
+  Outputs:
+    KittensWebpageURL:
+      Description: The URL of the Kittens Web Page
+      Value: !GetAtt KittensInstance.PublicDNSName
