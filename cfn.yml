@@ -9,13 +9,13 @@ Parameters:
     Default: "/aws/service/ami-amazon-linux-latest/al2023-ami-minimal-kernel-default-x86_64"
 
 Resources:
-  DenemeInstance:
+  KittensInstance:
     Type: AWS::EC2::Instance
     Properties:
       ImageId: !Ref LatestAmiId
       InstanceType: t2.micro
       SecurityGroups:
-        - !Ref DenemeSecGrup
+        - !Ref KittensSecGrupSecGrup
       UserData:
         Fn::Base64: |
           #! /bin/bash
@@ -30,7 +30,7 @@ Resources:
           wget ${FOLDER}/cat3.png
           systemctl start httpd
           systemctl enable httpd
-  DenemeSecGrup:
+  KittensSecGrup:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: SSH and HTTP # Required
